@@ -5,7 +5,7 @@ import com.mountain.springboot.common.BaseService;
 import ${poPackage}.${poClassName};
 
 @Repository
-public interface ${serviceClassName} extends BaseService<${poClassName}> {
+public interface ${serviceClassName} extends BaseService<${poClassName}, ${keyType}> {
 	
 	
 }

@@ -5,7 +5,7 @@ public class Message {
     private Long id;
     private String nickName;
     private String ip;
-    private Date insertTime;
+    private Date insertName;
 
     public Long getId(){
       return id;
@@ -25,11 +25,11 @@ public class Message {
     public void setIp(String ip){
       this.ip = ip;
     }
-    public Date getInsertTime(){
-      return insertTime;
+    public Date getInsertName(){
+      return insertName;
     }
-    public void setInsertTime(Date insertTime){
-      this.insertTime = insertTime;
+    public void setInsertName(Date insertName){
+      this.insertName = insertName;
     }
 
 }

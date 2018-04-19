@@ -27,7 +27,7 @@ public class BaseDaoImpl implements BaseDao {
 		String sql = "SELECT * FROM " + tableName + " WHERE 1 =2";
 		SqlRowSet rs = template.queryForRowSet(sql);
 		SqlRowSetMetaData rsm = rs.getMetaData();
-		
+
 		int columnCount = rsm.getColumnCount();
 		List<ColumnBean> columnList = new ArrayList<ColumnBean>();
 		for (int i = 1; i < columnCount+1; i++) {

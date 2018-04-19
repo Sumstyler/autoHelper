@@ -5,7 +5,7 @@ import com.mountain.springboot.common.BaseDao;
 import ${poPackage}.${poClassName};
 
 @Repository
-public interface ${daoClassName} extends BaseDao<${poClassName}> {
+public interface ${daoClassName} extends BaseDao<${poClassName}, ${keyType}> {
 	
 	
 }

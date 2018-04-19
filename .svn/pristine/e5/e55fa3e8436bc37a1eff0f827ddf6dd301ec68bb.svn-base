@@ -1,0 +1,11 @@
+package com.it.dao;
+
+import org.springframework.stereotype.Repository;
+import com.eweb.it.base.dao.BaseDao;
+import com.it.po.Test;
+
+@Repository
+public interface TestDao extends BaseDao<Test> {
+	
+	
+}

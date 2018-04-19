@@ -2,8 +2,14 @@ package com.it.context.support;
 
 import java.util.List;
 
+import com.it.util.BeanUtil;
+
 public class GeneratorBean {
 
+	// 主键类型
+	private String keyType;
+
+	private String tableName;
 	private String poClassName;
 	private String poPackage;
 	private String paramPoClassName;
@@ -25,7 +31,9 @@ public class GeneratorBean {
 	public GeneratorBean() {
 	};
 
-	public GeneratorBean(String packageName, String className) {
+	public GeneratorBean(String packageName, String tableName) {
+		String className = BeanUtil.upperFirstChar(tableName);
+		this.tableName = tableName;
 		this.poPackage = packageName + ".po";
 		this.poClassName = className;
 		this.paramPoClassName = new StringBuilder().append(Character.toLowerCase(poClassName.charAt(0)))
@@ -45,6 +53,15 @@ public class GeneratorBean {
 		this.controllerPackageName = packageName + ".controller";
 		this.paramControllerClassName = new StringBuilder().append(Character.toLowerCase(controllerClassName.charAt(0)))
 				.append(controllerClassName.substring(1)).toString();
+		this.keyType = "Long";
+	}
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
 	}
 
 	public String getPoClassName() {
@@ -175,4 +192,11 @@ public class GeneratorBean {
 		this.controllerPackageName = controllerPackageName;
 	}
 
+	public String getKeyType() {
+		return keyType;
+	}
+
+	public void setKeyType(String keyType) {
+		this.keyType = keyType;
+	}
 }

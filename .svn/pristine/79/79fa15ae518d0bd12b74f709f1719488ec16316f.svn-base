@@ -1,11 +1,11 @@
 package ${daoPackageName};
 
 import org.springframework.stereotype.Repository;
-import com.mountain.springboot.common.BaseDao;
+import com.eweb.it.base.dao.BaseDao;
 import ${poPackage}.${poClassName};
 
 @Repository
-public interface ${daoClassName} extends BaseDao<${poClassName}, ${keyType}> {
+public interface ${daoClassName} extends BaseDao<${poClassName}> {
 	
 	
 }

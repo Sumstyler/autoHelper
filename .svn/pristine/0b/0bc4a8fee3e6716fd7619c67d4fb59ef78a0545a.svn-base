@@ -1,0 +1,114 @@
+package com.it.context.support;
+
+import java.util.List;
+
+public class GeneratorBean {
+
+	private String poClassName;
+	private String poPackage;
+	private String daoClassName;
+	private String daoPackageName;
+	private String servicePackage;
+	private String serviceClassName;
+	private String serviceImplPackage;
+	private String serviceImplClassName;
+	private String mapperName;
+
+	private List<PropertiesBean> poProperties;
+
+	public GeneratorBean() {
+	};
+
+	public GeneratorBean(String packageName, String className) {
+		this.poPackage = packageName + ".po";
+		this.poClassName = className;
+		this.daoPackageName = packageName + ".dao";
+		this.daoClassName = className + "Dao";
+		this.serviceClassName = "I" + className + "Service";
+		this.servicePackage = packageName + ".service";
+		this.serviceImplClassName = className + "Service";
+		this.serviceImplPackage = packageName + ".service.impl";
+		this.mapperName = className + "Dao";
+	}
+
+	public String getPoClassName() {
+		return poClassName;
+	}
+
+	public void setPoClassName(String poClassName) {
+		this.poClassName = poClassName;
+	}
+
+	public String getPoPackage() {
+		return poPackage;
+	}
+
+	public void setPoPackage(String poPackage) {
+		this.poPackage = poPackage;
+	}
+
+	public String getDaoClassName() {
+		return daoClassName;
+	}
+
+	public void setDaoClassName(String daoClassName) {
+		this.daoClassName = daoClassName;
+	}
+
+	public String getDaoPackageName() {
+		return daoPackageName;
+	}
+
+	public void setDaoPackageName(String daoPackageName) {
+		this.daoPackageName = daoPackageName;
+	}
+
+	public String getServiceClassName() {
+		return serviceClassName;
+	}
+
+	public void setServiceClassName(String serviceClassName) {
+		this.serviceClassName = serviceClassName;
+	}
+
+	public String getServiceImplClassName() {
+		return serviceImplClassName;
+	}
+
+	public void setServiceImplClassName(String serviceImplClassName) {
+		this.serviceImplClassName = serviceImplClassName;
+	}
+
+	public String getMapperName() {
+		return mapperName;
+	}
+
+	public void setMapperName(String mapperName) {
+		this.mapperName = mapperName;
+	}
+
+	public String getServicePackage() {
+		return servicePackage;
+	}
+
+	public void setServicePackage(String servicePackage) {
+		this.servicePackage = servicePackage;
+	}
+
+	public String getServiceImplPackage() {
+		return serviceImplPackage;
+	}
+
+	public void setServiceImplPackage(String serviceImplPackage) {
+		this.serviceImplPackage = serviceImplPackage;
+	}
+
+	public List<PropertiesBean> getPoProperties() {
+		return poProperties;
+	}
+
+	public void setPoProperties(List<PropertiesBean> poProperties) {
+		this.poProperties = poProperties;
+	}
+
+}

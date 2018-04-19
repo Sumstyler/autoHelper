@@ -3,179 +3,80 @@
 <mapper namespace="com.mountain.springboot.dao.${daoClassName}">
 	<resultMap type="${paramDaoClassName}" id="${daoClassName}Map">
 		<#list poProperties as prop>
-			<result column="id" property="id" />
-			private ${prop.type} ${prop.name};
+			<result property="${prop.name}" column="${prop.columnName}" />
 		</#list>
-		<result column="id" property="id" />
-		<result column="appId" property="appid" />
-		<result column="appSecret" property="appsecret" />
-		<result column="tel" property="tel" />
-		<result column="contact_person" property="contactPerson" />
-		<result column="province" property="province" />
-		<result column="city" property="city" />
-		<result column="address" property="address" />
-		<result column="remark" property="remark" />
-		<result column="default_chainId" property="defaultChainid" />
-		<result column="valid" property="valid" />
-		<result column="Creater" property="creater" />
-		<result column="CreateTime" property="createtime" />
-		<result column="Updater" property="updater" />
-		<result column="UpdateTime" property="updatetime" />
-		<!-- 新增一下两个属性 来源于lj_sys_user表 -->
-		<result column="name" property="name" />
-		<result column="username" property="username" />
 	</resultMap>
 
-
 	<sql id="Base_Column_List">
-		id,
-		appId,
-		appSecret,
-		tel,
-		contact_person,
-		province,
-		city,
-		address,
-		remark,
-		default_chainId,
-		valid,
-		Creater,
-		CreateTime,
-		Updater,
-		UpdateTime
+		<#list poProperties as prop>
+			${prop.columnName}<#if prop_has_next>,</#if> 
+		</#list>
 	</sql>
-	<sql id="query_ljAgency_where">
+	
+	<sql id="query_${paramPoClassName}_where">
 		<where>
-			<if test="id != null and id !=''">and id = #{id}</if>
-			<if test="appid != null and appid !=''">and appId = #{appid}</if>
-			<if test="appsecret != null and appsecret !=''">and appSecret = #{appsecret}</if>
-			<if test="tel != null and tel !=''">and tel = #{tel}</if>
-			<if test="contactPerson != null and contactPerson !=''">and contact_person = #{contactPerson}</if>
-			<if test="province != null and province !=''">and province = #{province}</if>
-			<if test="city != null and city !=''">and city = #{city}</if>
-			<if test="address != null and address !=''">and address = #{address}</if>
-			<if test="remark != null and remark !=''">and remark = #{remark}</if>
-			<if test="defaultChainid != null and defaultChainid !=''">and default_chainId = #{defaultChainid}</if>
-			<if test="valid != null and valid !=''">and valid = #{valid}</if>
-			<if test="creater != null and creater !=''">and Creater = #{creater}</if>
-			<if test="createtime != null and createtime !=''">and CreateTime = #{createtime}</if>
-			<if test="updater != null and updater !=''">and Updater = #{updater}</if>
-			<if test="updatetime != null and updatetime !=''">and UpdateTime = #{updatetime}</if>
-			<if test="keyword != null and keyword !=''">and (name like CONCAT('%', #{keyword}, '%') OR userName like CONCAT('%', #{keyword}, '%') OR tel like CONCAT('%', #{keyword}, '%'))</if>
+			<#list poProperties as prop>
+				<if test="${prop.name} != null and ${prop.name} !=''">and ${prop.columnName} = ${r'#{'}${prop.name}${r'}'}</if>
+			</#list>
 		</where>
 	</sql>
 
-	<select id="selectByPrimaryKey" resultMap="LjAgencyMap"
+	<select id="selectByPrimaryKey" resultMap="${daoClassName}Map"
 		parameterType="java.lang.Long">
 		SELECT
-		A.*, B.userName,
-		B.`name`
+		<include refid="Base_Column_List"></include>
 		FROM
-		lj_agency A
-		LEFT
-		JOIN lj_sys_user B ON A.id = B.agencyId
-		where A.id = #{id}
+		${tableName}
+		where id = ${r'#{id}'}
 	</select>
 
-	<select id="selectByMap" resultMap="LjAgencyMap" parameterType="java.util.Map">
+	<select id="selectByMap" resultMap="${daoClassName}Map" parameterType="java.util.Map">
 		SELECT
-		A.*, B.userName,
-		B.`name`
+		<include refid="Base_Column_List"></include>
 		FROM
-		lj_agency A
-		LEFT JOIN lj_sys_user B
-		ON A.id = B.agencyId
-		<include refid="query_ljAgency_where"></include>
-		<if test="start != null and pageSize != null">limit #{start},#{pageSize}</if>
+		${tableName}
+		<include refid="query_${paramPoClassName}_where"></include>
+		<if test="start != null and pageSize != null">limit ${r'#{start}'},${r'#{pageSize}'}</if>
 	</select>
 
 	<select id="countByMap" resultType="long" parameterType="java.util.Map">
 		SELECT
-		count(1)
+		count(0)
 		FROM
-		lj_agency A
-		LEFT
-		JOIN lj_sys_user B ON A.id = B.agencyId
-		<include refid="query_ljAgency_where"></include>
+		${tableName}
+		<include refid="query_${paramPoClassName}_where"></include>
 	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		delete from
-		lj_agency
+		${tableName}
 		where
-		id=#{id}
+		id = ${r'#{id}'}
 	</delete>
 
-	<insert id="insert" parameterType="ljAgency">
-		insert into lj_agency (
+	<insert id="insert" parameterType="${paramPoClassName}">
+		insert into ${tableName} (
 		<include refid="Base_Column_List"></include>
 		)
 		values(
-		#{id},
-		#{appid},
-		#{appsecret},
-		#{tel},
-		#{contactPerson},
-		#{province},
-		#{city},
-		#{address},
-		#{remark},
-		#{defaultChainid},
-		#{valid},
-		#{creater},
-		#{createtime},
-		#{updater},
-		#{updatetime}
+		<#list poProperties as prop>
+			${r'#{'}${prop.name}${r'}'}<#if prop_has_next>,</#if> 
+		</#list>
 		)
 	</insert>
 
 
-	<update id="updateByPrimaryKeySelective" parameterType="ljAgency">
-		update lj_agency
+	<update id="updateByPrimaryKeySelective" parameterType="${paramPoClassName}">
+		update ${tableName}
 		<set>
-			<if test="appid != null">
-		  		appId = #{appid,jdbcType=VARCHAR},
-			</if>
-			<if test="appsecret != null">
-		  		appSecret = #{appsecret,jdbcType=VARCHAR},
-			</if>
-			<if test="tel != null">
-				tel = #{tel,jdbcType=VARCHAR},
-			</if>
-			<if test="contactPerson != null">
-		  		contact_person = #{contactPerson,jdbcType=VARCHAR},
-			</if>
-			<if test="province != null">
-				province = #{province,jdbcType=VARCHAR},
-			</if>
-			<if test="city != null">
-				city = #{city,jdbcType=VARCHAR},
-			</if>
-			<if test="address != null">
-				address = #{address,jdbcType=VARCHAR},
-			</if>
-			<if test="remark != null">
-				remark = #{remark,jdbcType=VARCHAR},
-			</if>
-			<if test="defaultChainid != null">
-		  		default_chainId = #{defaultChainid,jdbcType=INTEGER},
-			</if>
-			<if test="valid != null">
-				valid = #{valid,jdbcType=VARCHAR},
-			</if>
-			<if test="creater != null">
-		  		creater = #{creater,jdbcType=INTEGER},
-			</if>
-			<if test="createtime != null">
-		  		createTime = #{createtime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updater != null">
-		  		updater = #{updater,jdbcType=INTEGER},
-			</if>
-			<if test="updatetime != null">
-		  		updateTime = #{updatetime,jdbcType=TIMESTAMP},
-			</if>
+			<#list poProperties as prop>
+				<#if prop_index != 0>
+					<if test="${prop.name} != null">
+				  		${prop.columnName} = ${r'#{'}${prop.name}${r'}'},
+					</if>
+				</#if>
+			</#list>
 		</set>
-		where id = #{id,jdbcType=INTEGER}
+		where id = ${r'#{id}'}
 	</update>
 </mapper>  

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mountain.springboot.dao.MessageDao">
+	<resultMap type="messageDao" id="MessageDaoMap">
+			<result property="id" column="id" />
+			<result property="nickName" column="nick_name" />
+			<result property="ip" column="ip" />
+			<result property="insertName" column="insert_name" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+			id, 
+			nick_name, 
+			ip, 
+			insert_name 
+	</sql>
+	
+	<sql id="query_message_where">
+		<where>
+				<if test="id != null and id !=''">and id = #{id}</if>
+				<if test="nickName != null and nickName !=''">and nick_name = #{nickName}</if>
+				<if test="ip != null and ip !=''">and ip = #{ip}</if>
+				<if test="insertName != null and insertName !=''">and insert_name = #{insertName}</if>
+		</where>
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="MessageDao"
+		parameterType="java.lang.Long">
+		SELECT
+		<include refid="Base_Column_List"></include>
+		FROM
+		message
+		where id = #{id}
+	</select>
+
+	<select id="selectByMap" resultMap="MessageDao" parameterType="java.util.Map">
+		SELECT
+		<include refid="Base_Column_List"></include>
+		FROM
+		message
+		<include refid="query_message_where"></include>
+		<if test="start != null and pageSize != null">limit #{start},#{pageSize}</if>
+	</select>
+
+	<select id="countByMap" resultType="long" parameterType="java.util.Map">
+		SELECT
+		count(0)
+		FROM
+		message
+		<include refid="query_message_where"></include>
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		message
+		where
+		id = #{id}
+	</delete>
+
+	<insert id="insert" parameterType="message">
+		insert into message (
+		<include refid="Base_Column_List"></include>
+		)
+		values(
+			#{id}, 
+			#{nickName}, 
+			#{ip}, 
+			#{insertName} 
+		)
+	</insert>
+
+
+	<update id="updateByPrimaryKeySelective" parameterType="message">
+		update message
+		<set>
+					<if test="nickName != null">
+				  		nick_name = #{nickName},
+					</if>
+					<if test="ip != null">
+				  		ip = #{ip},
+					</if>
+					<if test="insertName != null">
+				  		insert_name = #{insertName},
+					</if>
+		</set>
+		where id = #{id}
+	</update>
+</mapper>  

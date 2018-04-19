@@ -1,4 +1,4 @@
-package base;
+/*package base;
 
 import javax.servlet.MultipartConfigElement;
 
@@ -9,19 +9,19 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-/**
+*//**
  * startup class
  * 
- */
+ *//*
 @SpringBootApplication
 @EnableTransactionManagement
 @ServletComponentScan
 public class Application {
-	/**
+	*//**
 	 * 文件上传大小配置
 	 * 
 	 * @return
-	 */
+	 *//*
 	@Bean
 	public MultipartConfigElement multipartConfigElement() {
 		MultipartConfigFactory factory = new MultipartConfigFactory();
@@ -37,3 +37,4 @@ public class Application {
 	}
 
 }
+*/

@@ -6,7 +6,7 @@ import ${poPackage}.${poClassName};
 
 @Repository
 public class ${serviceImplClassName} extends AbstractService<${poClassName}, Long> implements
-		${serviceClassName}<${poClassName}, Long> {
+		${serviceClassName} {
 	
 	@Autowired
 	private ${daoClassName} ${paramDaoClassName};

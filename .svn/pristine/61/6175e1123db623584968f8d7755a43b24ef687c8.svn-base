@@ -1,0 +1,4 @@
+tables=test
+packageName=com.it
+genDir=gen_dir
+templatePath=template
