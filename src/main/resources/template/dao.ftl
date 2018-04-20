@@ -1,10 +1,10 @@
 package ${daoPackageName};
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 import com.mountain.springboot.common.BaseDao;
 import ${poPackage}.${poClassName};
 
-@Repository
+@Mapper
 public interface ${daoClassName} extends BaseDao<${poClassName}, ${keyType}> {
 	
 	

@@ -1,10 +1,11 @@
 package ${serviceImplPackage};
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
 import com.mountain.springboot.common.BaseDao;
 import ${poPackage}.${poClassName};
 
-@Repository
+@Service
 public class ${serviceImplClassName} extends AbstractService<${poClassName}, Long> implements
 		${serviceClassName} {
 	
