@@ -7,5 +7,4 @@ import ${poPackage}.${poClassName};
 @Mapper
 public interface ${daoClassName} extends BaseDao<${poClassName}, ${keyType}> {
 	
-	
 }

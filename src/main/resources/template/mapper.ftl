@@ -70,11 +70,11 @@
 		update ${tableName}
 		<set>
 			<#list poProperties as prop>
-				<#if prop_index != 0>
-					<if test="${prop.name} != null">
-				  		${prop.columnName} = ${r'#{'}${prop.name}${r'}'},
-					</if>
-				</#if>
+			<#if prop_index != 0>
+			<if test="${prop.name} != null">
+				${prop.columnName} = ${r'#{'}${prop.name}${r'}'}<#if prop_has_next>,</#if>
+			</if>
+			</#if>
 			</#list>
 		</set>
 		where id = ${r'#{id}'}
