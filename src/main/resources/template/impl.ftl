@@ -2,7 +2,7 @@ package ${serviceImplPackage};
 
 import org.springframework.stereotype.Service;
 
-import com.mountain.springboot.common.BaseDao;
+import ${packageName}.common.BaseDao;
 import ${poPackage}.${poClassName};
 
 @Service

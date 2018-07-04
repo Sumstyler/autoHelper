@@ -8,7 +8,7 @@ public class GeneratorBean {
 
 	// 主键类型
 	private String keyType;
-
+	private String packageName;
 	private String tableName;
 	private String poClassName;
 	private String poPackage;
@@ -33,6 +33,7 @@ public class GeneratorBean {
 
 	public GeneratorBean(String packageName, String tableName) {
 		String className = BeanUtil.upperFirstChar(tableName);
+		this.packageName = packageName;
 		this.tableName = tableName;
 		this.poPackage = packageName + ".po";
 		this.poClassName = className;
@@ -198,5 +199,13 @@ public class GeneratorBean {
 
 	public void setKeyType(String keyType) {
 		this.keyType = keyType;
+	}
+
+	public String getPackageName() {
+		return packageName;
+	}
+
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
 	}
 }

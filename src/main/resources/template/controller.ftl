@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mountain.spring.common.PageBean;
-import com.mountain.spring.entity.${poClassName};
-import com.mountain.spring.service.${serviceClassName};
+import ${packageName}.common.PageBean;
+import ${packageName}.entity.${poClassName};
+import ${packageName}.service.${serviceClassName};
 
 @RestController
 @RequestMapping("/${paramPoClassName}")
