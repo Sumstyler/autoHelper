@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mountain.dao.${daoClassName}">
-	<resultMap type="${paramPoClassName}" id="${poClassName}Map">
+	<resultMap type="${paramPoClassName}" id="${paramPoClassName}Map">
 		<#list poProperties as prop>
 			<result property="${prop.name}" column="${prop.columnName}" />
 		</#list>
@@ -21,7 +21,7 @@
 		</where>
 	</sql>
 
-	<select id="selectByPrimaryKey" resultMap="${daoClassName}Map"
+	<select id="selectByPrimaryKey" resultMap="${paramPoClassName}Map"
 		parameterType="java.lang.Long">
 		SELECT
 		<include refid="Base_Column_List"></include>
@@ -30,7 +30,7 @@
 		where id = ${r'#{id}'}
 	</select>
 
-	<select id="selectByMap" resultMap="${daoClassName}Map" parameterType="java.util.Map">
+	<select id="selectByMap" resultMap="${paramPoClassName}Map" parameterType="java.util.Map">
 		SELECT
 		<include refid="Base_Column_List"></include>
 		FROM
